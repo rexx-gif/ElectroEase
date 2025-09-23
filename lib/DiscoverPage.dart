@@ -3,7 +3,8 @@ import 'package:flutter/gestures.dart'; // penting untuk dragDevices
 import 'dart:ui';
 
 class DiscoverPage extends StatelessWidget {
-  const DiscoverPage({super.key});
+  final String username;
+  const DiscoverPage({super.key, required this.username});
 
   @override
   Widget build(BuildContext context) {
@@ -48,11 +49,11 @@ class DiscoverPage extends StatelessWidget {
                           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZtgPLFlWUsiIA3LPidwBl2AhwXkdQNiBVLg&s",
                         ),
                       ),
-                      const SizedBox(width: 12),
+                      SizedBox(width: 12),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
                               "Welcome back",
                               style: TextStyle(
@@ -61,7 +62,7 @@ class DiscoverPage extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              "rexx keren",
+                              username.isEmpty ? "Guest" : username,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,

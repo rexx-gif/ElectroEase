@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:layout_masiqbal_1/DiscoverPage.dart';
+import 'package:electroease/DiscoverPage.dart';
 import 'package:lottie/lottie.dart';
-import 'dart:math' as math;
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  // Controller buat TextField username
+  final TextEditingController _usernameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -118,13 +125,23 @@ class LoginPage extends StatelessWidget {
                       child: SizedBox(
                         width: 350,
                         child: TextField(
+                          style: TextStyle(
+                            color: Colors.white
+                          ),
+                          cursorColor: Colors.blueAccent,
+                          controller: _usernameController,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.transparent.withOpacity(0.6),
-                            labelText: "Username",
-                            hintText: "Enter your Username",
+                            hintText: "Username",
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: BorderSide(
+                                color: Colors.blueAccent
+                              ),
                             ),
                             suffixIcon: const Icon(Icons.person),
                           ),
@@ -136,14 +153,23 @@ class LoginPage extends StatelessWidget {
                       child: SizedBox(
                         width: 350,
                         child: TextField(
+                          style: TextStyle(
+                            color: Colors.white
+                          ),
+                          cursorColor: Colors.blueAccent,
                           obscureText: true,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.transparent.withOpacity(0.6),
-                            labelText: "Password",
-                            hintText: "Enter your Password",
+                            hintText: "Password",
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: BorderSide(
+                                color: Colors.blueAccent
+                              )
                             ),
                             suffixIcon: const Icon(Icons.lock),
                           ),
@@ -159,7 +185,9 @@ class LoginPage extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => DiscoverPage(),
+                                builder: (context) => DiscoverPage(
+                                  username: _usernameController.text,
+                                ),
                               ));
                         },
                         style: ElevatedButton.styleFrom(

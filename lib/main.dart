@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:layout_masiqbal_1/DiscoverPage.dart';
+import 'package:electroease/DiscoverPage.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:layout_masiqbal_1/LoginPage.dart';
+import 'package:electroease/LoginPage.dart';
 
 
 void main() {
