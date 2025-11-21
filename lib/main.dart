@@ -1,3 +1,5 @@
+import 'package:electroease/CartPage.dart';
+import 'package:electroease/ProfilePage.dart';
 import 'package:flutter/material.dart';
 import 'package:electroease/DiscoverPage.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -36,7 +38,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         textTheme: GoogleFonts.poppinsTextTheme(),
       ),
-      home: LoginPage(),
+      home: const LoginPage(),
     );
   }
 }

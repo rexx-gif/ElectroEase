@@ -1,3 +1,5 @@
+import 'package:electroease/CartPage.dart';
+import 'package:electroease/ProfilePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart'; // penting untuk dragDevices
 import 'dart:ui';
@@ -27,8 +29,8 @@ class DiscoverPage extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Color(0xff141E30), // navy gelap
-              Color.fromARGB(255, 176, 178, 180), // biru abu gelap
+              Color(0xff141E30),
+              Color.fromARGB(255, 176, 178, 180), 
             ],
           ),
         ),
@@ -45,28 +47,43 @@ class DiscoverPage extends StatelessWidget {
                     children: [
                       const CircleAvatar(
                         radius: 25,
-                        backgroundImage: NetworkImage(
-                          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZtgPLFlWUsiIA3LPidwBl2AhwXkdQNiBVLg&s",
+                        backgroundImage: AssetImage(
+                          "assets/images/pp.jpg",
                         ),
                       ),
                       SizedBox(width: 12),
                       Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              "Welcome back",
-                              style: TextStyle(
-                                color: Colors.white70,
-                                fontSize: 16,
-                              ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Welcome back",
+                                  style: TextStyle(
+                                    color: Colors.white70,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                Text(
+                                  username.isEmpty ? "Guest" : username,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
                             ),
-                            Text(
-                              username.isEmpty ? "Guest" : username,
-                              style: TextStyle(
+                            IconButton(
+                              onPressed: () {
+                                Navigator.push(context,MaterialPageRoute(builder: (context) => CartPage(username: username)));
+                              },
+                              icon: Icon(
+                                Icons.shopping_cart_outlined,
                                 color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
+                                size: 30,
                               ),
                             ),
                           ],
@@ -84,12 +101,11 @@ class DiscoverPage extends StatelessWidget {
 
                 const SizedBox(height: 20),
 
-                // Search bar + sort button
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     SizedBox(
-                      width: 400,
+                      width: 350,
                       child: TextField(
                         style: TextStyle(color: Colors.white),
                         cursorColor: Colors.blueAccent,
@@ -124,13 +140,26 @@ class DiscoverPage extends StatelessWidget {
                                   builder: (context) => Dialog(
                                     alignment: Alignment.center,
                                     insetAnimationDuration: Durations.medium1,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text("Talk To Mic to Search"),
-                                        Icon(Icons.search),
-                                      ],
+                                    child: SizedBox(
+                                      width: 250, 
+                                      height: 200, 
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text("Talk To Mic to Search"),
+                                          SizedBox(height: 10),
+                                          Icon(Icons.search, size: 40),
+                                          // Align(
+                                          //   alignment: Alignment.topRight,
+                                          //   child: SizedBox(
+                                          //     child: ElevatedButton(onPressed: (){
+                                          //       Navigator.pop(context);
+                                          //     }, child: Icon(Icons.close)),
+                                          //   ),
+                                          // )
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 );
@@ -161,24 +190,23 @@ class DiscoverPage extends StatelessWidget {
                       child: Text("Discover",
                           style: TextStyle(
                               fontSize: 30,
-                              fontWeight: FontWeight.w200,
+                              fontWeight: FontWeight.bold,
                               color: Colors.white)),
                     ),
                   ],
                 ),
                 const SizedBox(height: 20),
-                // Banner + iPhone image
                 Stack(
                   clipBehavior: Clip.none,
                   children: [
                     Container(
-                      width: 475,
+                      width: 430,
                       height: 180,
                       decoration: BoxDecoration(
                         color: Colors.black,
                         borderRadius: BorderRadius.circular(16),
                         image: const DecorationImage(
-                          image: NetworkImage('assets/images/bg.png'),
+                          image: AssetImage('assets/images/bg.png'),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -242,7 +270,6 @@ class DiscoverPage extends StatelessWidget {
 
                 const SizedBox(height: 20),
 
-                // List horizontal bisa di scroll di HP & PC
                 Padding(
                   padding: const EdgeInsets.only(
                       top: 0, right: 20, left: 15, bottom: 10),
@@ -254,7 +281,7 @@ class DiscoverPage extends StatelessWidget {
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
-                            fontSize: 18),
+                            fontSize: 25),
                       ),
                       Text(
                         "See All",
@@ -273,13 +300,13 @@ class DiscoverPage extends StatelessWidget {
                   child: ScrollConfiguration(
                     behavior: ScrollConfiguration.of(context).copyWith(
                       dragDevices: {
-                        PointerDeviceKind.touch, // biar bisa swipe di HP
-                        PointerDeviceKind.mouse, // biar bisa drag di PC
+                        PointerDeviceKind.touch,
+                        PointerDeviceKind.mouse,
                       },
                     ),
                     child: Scrollbar(
-                      interactive: true,
-                      thumbVisibility: true,
+                      interactive: false,
+                      thumbVisibility: false,
                       trackVisibility: false,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
@@ -290,7 +317,6 @@ class DiscoverPage extends StatelessWidget {
                             width: 120,
                             margin: const EdgeInsets.symmetric(horizontal: 8),
                             decoration: BoxDecoration(
-                              color: Colors.transparent,
                               border: Border.all(color: Colors.white),
                               borderRadius: BorderRadius.circular(16),
                             ),
@@ -316,7 +342,6 @@ class DiscoverPage extends StatelessWidget {
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              // Glass Container
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(16),
                                 child: BackdropFilter(
@@ -354,8 +379,7 @@ class DiscoverPage extends StatelessWidget {
                                         child: const Text(
                                           "Iphone 14 Pro",
                                           style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 153, 153, 153),
+                                            color: Colors.black,
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold,
                                           ),
@@ -427,159 +451,7 @@ class DiscoverPage extends StatelessWidget {
                                         child: const Text(
                                           "Iphone 14 Pro",
                                           style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 153, 153, 153),
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                      const Text(
-                                        "🌟 4.9",
-                                        style: TextStyle(
-                                          color: Color.fromARGB(255, 0, 0, 0),
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const Text(
-                                    "132.00",
-                                    style: TextStyle(
-                                      color: Color.fromARGB(255, 0, 0, 0),
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              // Glass Container
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(16),
-                                child: BackdropFilter(
-                                  filter:
-                                      ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                                  child: Container(
-                                    width: 200,
-                                    height: 190,
-                                    decoration: BoxDecoration(
-                                      color: Colors.black.withOpacity(0.2),
-                                      image: DecorationImage(
-                                          image: AssetImage(
-                                              "assets/images/iphone-14.png")),
-                                      borderRadius: BorderRadius.circular(16),
-                                      border: Border.all(
-                                        color: Colors.white.withOpacity(0.3),
-                                        width: 1.5,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-
-                              const SizedBox(height: 10),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 40),
-                                        child: const Text(
-                                          "Iphone 14 Pro",
-                                          style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 153, 153, 153),
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                      const Text(
-                                        "🌟 4.9",
-                                        style: TextStyle(
-                                          color: Color.fromARGB(255, 0, 0, 0),
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const Text(
-                                    "132.00",
-                                    style: TextStyle(
-                                      color: Color.fromARGB(255, 0, 0, 0),
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              // Glass Container
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(16),
-                                child: BackdropFilter(
-                                  filter:
-                                      ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                                  child: Container(
-                                    width: 200,
-                                    height: 190,
-                                    decoration: BoxDecoration(
-                                      color: Colors.black.withOpacity(0.2),
-                                      borderRadius: BorderRadius.circular(16),
-                                      image: DecorationImage(
-                                          image: AssetImage(
-                                              "assets/images/iphone-14.png")),
-                                      border: Border.all(
-                                        color: Colors.white.withOpacity(0.3),
-                                        width: 1.5,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-
-                              const SizedBox(height: 10),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 40),
-                                        child: const Text(
-                                          "Iphone 14 Pro",
-                                          style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 153, 153, 153),
+                                            color: Colors.black,
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold,
                                           ),
@@ -656,8 +528,7 @@ class DiscoverPage extends StatelessWidget {
                                         child: const Text(
                                           "Iphone 14 Pro",
                                           style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 153, 153, 153),
+                                            color: Colors.black,
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold,
                                           ),
@@ -729,8 +600,156 @@ class DiscoverPage extends StatelessWidget {
                                         child: const Text(
                                           "Iphone 14 Pro",
                                           style: TextStyle(
-                                            color: Color.fromARGB(
-                                                255, 153, 153, 153),
+                                            color: Colors.black,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                      const Text(
+                                        "🌟 4.9",
+                                        style: TextStyle(
+                                          color: Color.fromARGB(255, 0, 0, 0),
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const Text(
+                                    "132.00",
+                                    style: TextStyle(
+                                      color: Color.fromARGB(255, 0, 0, 0),
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              // Glass Container
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(16),
+                                child: BackdropFilter(
+                                  filter:
+                                      ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                                  child: Container(
+                                    width: 200,
+                                    height: 190,
+                                    decoration: BoxDecoration(
+                                      color: Colors.black.withOpacity(0.2),
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              "assets/images/iphone-14.png")),
+                                      borderRadius: BorderRadius.circular(16),
+                                      border: Border.all(
+                                        color: Colors.white.withOpacity(0.3),
+                                        width: 1.5,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+
+                              const SizedBox(height: 10),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 40),
+                                        child: const Text(
+                                          "Iphone 14 Pro",
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                      const Text(
+                                        "🌟 4.9",
+                                        style: TextStyle(
+                                          color: Color.fromARGB(255, 0, 0, 0),
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const Text(
+                                    "132.00",
+                                    style: TextStyle(
+                                      color: Color.fromARGB(255, 0, 0, 0),
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              // Glass Container
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(16),
+                                child: BackdropFilter(
+                                  filter:
+                                      ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                                  child: Container(
+                                    width: 200,
+                                    height: 190,
+                                    decoration: BoxDecoration(
+                                      color: Colors.black.withOpacity(0.2),
+                                      borderRadius: BorderRadius.circular(16),
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              "assets/images/iphone-14.png")),
+                                      border: Border.all(
+                                        color: Colors.white.withOpacity(0.3),
+                                        width: 1.5,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+
+                              const SizedBox(height: 10),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 40),
+                                        child: const Text(
+                                          "Iphone 14 Pro",
+                                          style: TextStyle(
+                                            color: Colors.black,
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold,
                                           ),
@@ -808,15 +827,39 @@ class DiscoverPage extends StatelessWidget {
                   ),
                 ],
               ),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: const [
-                  Icon(Icons.person_2_outlined, color: Colors.white),
-                  Text(
-                    "Profile",
-                    style: TextStyle(color: Colors.white, fontSize: 12),
-                  ),
-                ],
+              InkWell(
+                onTap: (){
+                  Navigator.push(
+                    context,MaterialPageRoute(builder: (context) => CartPage(username: username,))
+                  );
+                },
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: const [
+                    Icon(Icons.shopping_cart_outlined, color: Colors.white),
+                    Text(
+                      "Cart",
+                      style: TextStyle(color: Colors.white, fontSize: 12),
+                    ),
+                  ],
+                ),
+              ),
+              InkWell(
+                onTap: (){
+                  Navigator.push(
+                    context,MaterialPageRoute(builder: (context) => ProfilePage(username: username,))
+                  );
+                },
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: const [
+                    Icon(Icons.person_2_outlined, color: Colors.white),
+                    Text(
+                      "Profile",
+                      style: TextStyle(color: Colors.white, fontSize: 12),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

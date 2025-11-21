@@ -1,20 +1,19 @@
-import 'package:electroease/RegisterPage.dart';
+import 'package:electroease/LoginPage.dart';
 import 'package:flutter/material.dart';
-import 'package:electroease/DiscoverPage.dart';
+// import 'package:electroease/DiscoverPage.dart';
 import 'package:lottie/lottie.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class Registerpage extends StatelessWidget {
+  const Registerpage({super.key});
 
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
+//   @override
+//   State<LoginPage> createState() => _LoginPageState();
+// }
 
-class _LoginPageState extends State<LoginPage> {
-  // Controller buat TextField username
-  final TextEditingController _usernameController = TextEditingController();
+// class _LoginPageState extends State<LoginPage> {
+//   // Controller buat TextField username
+//   final TextEditingController _usernameController = TextEditingController();
 
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
@@ -102,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                     Padding(
                       padding: const EdgeInsets.only(right: 260),
                       child: Text(
-                        "Login",
+                        "Register",
                         style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
@@ -113,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                     Padding(
                       padding: const EdgeInsets.only(left: 45, top: 5),
                       child: Text(
-                        "Welcome back,please sign in first to your account.",
+                        "Welcome back,please sign up first to your account.",
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w400,
@@ -126,9 +125,11 @@ class _LoginPageState extends State<LoginPage> {
                       child: SizedBox(
                         width: 350,
                         child: TextField(
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(
+                            color: Colors.white
+                          ),
                           cursorColor: Colors.blueAccent,
-                          controller: _usernameController,
+                          // controller: _usernameController,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.transparent.withOpacity(0.6),
@@ -138,7 +139,9 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide(color: Colors.blueAccent),
+                              borderSide: BorderSide(
+                                color: Colors.blueAccent
+                              ),
                             ),
                             suffixIcon: const Icon(Icons.person),
                           ),
@@ -150,7 +153,9 @@ class _LoginPageState extends State<LoginPage> {
                       child: SizedBox(
                         width: 350,
                         child: TextField(
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(
+                            color: Colors.white
+                          ),
                           cursorColor: Colors.blueAccent,
                           obscureText: true,
                           decoration: InputDecoration(
@@ -161,30 +166,41 @@ class _LoginPageState extends State<LoginPage> {
                               borderRadius: BorderRadius.circular(12),
                             ),
                             focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                borderSide:
-                                    BorderSide(color: Colors.blueAccent)),
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: BorderSide(
+                                color: Colors.blueAccent
+                              )
+                            ),
                             suffixIcon: const Icon(Icons.lock),
                           ),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 20),
-                    SizedBox(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Registerpage(),
-                            )
-                          );
-                        },
-                        child: Text("Don't have an account? Register Here"),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.transparent,
-                          foregroundColor: Colors.white,
-                          elevation: 0,
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20),
+                      child: SizedBox(
+                        width: 350,
+                        child: TextField(
+                          style: TextStyle(
+                            color: Colors.white
+                          ),
+                          cursorColor: Colors.blueAccent,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.transparent.withOpacity(0.6),
+                            hintText: "Confirm Password",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: BorderSide(
+                                color: Colors.blueAccent
+                              )
+                            ),
+                            suffixIcon: const Icon(Icons.lock),
+                          ),
                         ),
                       ),
                     ),
@@ -197,8 +213,8 @@ class _LoginPageState extends State<LoginPage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => DiscoverPage(
-                                  username: _usernameController.text,
+                                builder: (context) => LoginPage(
+                                  // username: _usernameController.text,
                                 ),
                               ));
                         },
@@ -208,7 +224,7 @@ class _LoginPageState extends State<LoginPage> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadiusGeometry.circular(16),
                             )),
-                        child: Text("Sign In"),
+                        child: Text("Sign Up"),
                       ),
                     ),
                   ],
